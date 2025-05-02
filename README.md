@@ -1,3 +1,4 @@
 ## ER図
-![image](https://github.com/user-attachments/assets/5c8822a8-8842-4754-94e3-5bea6bd42241)
+![image](https://github.com/user-attachments/assets/50ee7ee6-eca2-4864-9aeb-089daf8a2eeb)
+
 
