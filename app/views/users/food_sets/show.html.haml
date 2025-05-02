@@ -13,3 +13,8 @@
             冷蔵: #{@food_set.refrigerated ? '要' : '不要'}
           .fs-6.card-text.mx-3.fw-semibold
             食品: #{@food_set.foods.map(&:name).join(", ")}
+          .fs-6.card-text.mx-3.fw-semibold
+            - if current_user.food_set_orderable?(@food_set)
+              申し込み済み
+            - else
+              = button_to '配達を申し込む', users_food_set_orders_path(@food_set), method: :post, class: 'btn btn-primary', data: { turbo_confirm: '申し込んでよろしいですか？' }

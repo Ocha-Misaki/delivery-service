@@ -1,0 +1,23 @@
+.row
+  - @orders.each do |order|
+    .col-sm-4.mb-3.mb-sm-0
+      .card.mb-4
+        = link_to users_order_path(order), class: 'text-decoration-none' do
+          .card-body.ms-2
+            .fs-6.card-text.mx-3.fw-semibold= order.food_set.name
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              価格: #{order.food_set.price}円
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              重量: #{order.food_set.total_weight}g
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              冷蔵: #{order.food_set.refrigerated ? '要' : '不要'}
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              食品: #{order.food_set.foods.map(&:name).join(", ")}
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              申し込み日: #{order.created_at.strftime('%Y/%m/%d %H:%M')}
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              冷凍品追加料金: #{order.refrigerated_fee}円
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              配達料金: #{order.shipping_fee}円
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              合計金額: #{order.total_price}円(税込)
