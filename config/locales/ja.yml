@@ -1,12 +1,30 @@
 ---
 ja:
   activerecord:
+    attributes:
+      user:
+        email: メールアドレス
+        password: パスワード
+        name: 名前
+        address: 住所
+        phone_number: 電話番号
+        plan: プラン
+        schedule: ご希望の配送スケジュール
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  enumerize:
+    defaults:
+      plan:
+        light: ライトプラン
+        standard: スタンダードプラン
+        family: ファミリープラン
+      schedule:
+        weekly: 毎週
+        monthly: 月1回
   date:
     abbr_day_names:
       - 日
