@@ -88,7 +88,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_073514) do
     t.integer "food_set_total_weight", null: false
     t.integer "food_set_refrigerated_fee", null: false
     t.integer "food_set_shipping_fee", null: false
-    t.integer "food_set_total_price", null: false
+    t.integer "total_price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["food_set_id", "order_id"], name: "index_order_items_on_food_set_id_and_order_id", unique: true
