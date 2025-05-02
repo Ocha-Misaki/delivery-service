@@ -18,8 +18,10 @@ Rails.application.routes.draw do
 
   namespace :users do
     root "food_sets#index"
-    resources :food_sets, only: [ :show ]
-    resources :orders, only: [ :index, :show, :new, :create ]
+    resources :food_sets, only: [ :show ] do
+      resources :orders, only: [ :new, :create ], module: :food_sets
+    end
+    resources :orders, only: [ :index, :show ]
     resources :delivery_schedules, only: [ :index, :show ]
   end
 end
