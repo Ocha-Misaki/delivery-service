@@ -13,9 +13,16 @@ class FoodSet < ApplicationRecord
   scope :refrigerated, -> { where(refrigerated: true) }
 
   TAX_RATE = 1.10
+  SHIPPING_FEE = 500
+  ADDITIONAL_SHIPPING_FEE = 800
+  REFRIGERATED_FEE = 200
 
   def price_including_tax
     (price * TAX_RATE).floor
+  end
+
+  def allergy_info
+    foods.map(&:allergy_info).join(", ")
   end
 
   private

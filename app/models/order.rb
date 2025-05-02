@@ -9,4 +9,6 @@ class Order < ApplicationRecord
   validates :total_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :shipping_fee, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :refrigerated_fee, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+  scope :default_order, -> { order(created_at: :desc) }
 end

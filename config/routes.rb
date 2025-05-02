@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :food_sets, only: [ :show ] do
       resources :orders, only: [ :new, :create ], module: :food_sets
     end
-    resources :orders, only: [ :index, :show ]
+    resources :orders, only: [ :index ]
     resources :delivery_schedules, only: [ :index, :show ]
   end
 end
