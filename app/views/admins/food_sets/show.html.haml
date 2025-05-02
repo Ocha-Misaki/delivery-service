@@ -6,7 +6,7 @@
           .fs-3.mb-3
             = @food_set.name
           .fs-6.card-text.mx-3.fw-semibold
-            価格: #{@food_set.price}円
+            価格: #{@food_set.price_including_tax}円(税込)
           .fs-6.card-text.mx-3.fw-semibold
             重量: #{@food_set.total_weight}g
           .fs-6.card-text.mx-3.fw-semibold

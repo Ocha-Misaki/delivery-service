@@ -1,6 +1,7 @@
 class FoodSet < ApplicationRecord
   has_many :food_set_items, dependent: :restrict_with_exception
   has_many :foods, through: :food_set_items
+  has_many :orders, dependent: :restrict_with_exception
   has_one_attached :recipe
 
   validates :name, presence: true
@@ -10,6 +11,12 @@ class FoodSet < ApplicationRecord
 
   scope :default_order, -> { order(created_at: :desc) }
   scope :refrigerated, -> { where(refrigerated: true) }
+
+  TAX_RATE = 1.10
+
+  def price_including_tax
+    (price * TAX_RATE).floor
+  end
 
   private
 
