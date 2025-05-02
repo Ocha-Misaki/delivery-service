@@ -1,0 +1,8 @@
+- url = food.new_record? ? admins_foods_path : admins_food_path(food)
+- method = food.new_record? ? :post : :patch
+
+= simple_form_for(food, url: url, method: method) do |f|
+  = render 'admins/error', resource: food
+  = f.input :name
+  = f.input :allergy_info, as: :text, input_html: { rows: 5 }
+  = f.button :submit, class: "btn btn-outline-success my-4"
