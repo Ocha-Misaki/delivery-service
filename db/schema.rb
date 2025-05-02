@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_02_021214) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_025137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,4 +25,34 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_021214) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
+
+  create_table "food_set_items", force: :cascade do |t|
+    t.bigint "food_id", null: false
+    t.bigint "food_set_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id", "food_set_id"], name: "index_food_set_items_on_food_and_food_set", unique: true
+    t.index ["food_id"], name: "index_food_set_items_on_food_id"
+    t.index ["food_set_id"], name: "index_food_set_items_on_food_set_id"
+  end
+
+  create_table "food_sets", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.integer "price", null: false
+    t.integer "total_weight", null: false
+    t.boolean "refrigerated", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "allergy_info", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "food_set_items", "food_sets"
+  add_foreign_key "food_set_items", "foods"
 end
