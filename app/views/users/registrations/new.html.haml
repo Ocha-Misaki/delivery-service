@@ -1,0 +1,10 @@
+
+= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f|
+  = f.input :name, required: true, autofocus: true, autocomplete: 'name'
+  = f.input :email, required: true, autocomplete: 'email'
+  = f.input :password, required: true, autocomplete: 'new-password'
+  = f.input :address, required: true, input_html: { row: 3, placeholder: '例）東京都千代田区1-1-1' }
+  = f.input :phone_number, required: true
+  = f.input :plan, collection: User.plan.values, required: true
+  = f.input :schedule, collection: User.schedule.values, required: true
+  = f.submit class: 'btn btn-primary'

@@ -1,0 +1,21 @@
+!!!
+%html.h-full{ lang: 'ja' }
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= content_for(:title) || "ユーザー画面"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    %meta{ name: "viewport", content: "width=device-width,initial-scale=1.0,maximum-scale=1.0" }
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{ rel: "stylesheet", type: "text/css", href: "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" }
+    %script{ type: "text/javascript", src: "https://cdn.jsdelivr.net/npm/toastify-js" }
+    = stylesheet_link_tag 'application', "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+  %body
+    = render 'users/header'
+    = render 'layouts/flash'
+    .container.my-5
+      = yield
