@@ -15,4 +15,4 @@
             .fs-6.card-text.mx-3.fw-semibold
               食品: #{order_item.food_set.foods.map(&:name).join(", ")}
             .fs-6.card-text.mx-3.fw-semibold
-              - button_tag '配達を申し込む'
+              = button_tag '配達を申し込む', class: 'btn btn-primary'
