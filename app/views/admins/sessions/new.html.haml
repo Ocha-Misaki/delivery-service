@@ -1,0 +1,12 @@
+.card.bg-base-100.shadow-xl.max-w-lg.mx-auto
+  .card-body
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-inputs
+        = f.input :email,
+          autofocus: true,
+          input_html: { autocomplete: "email" }
+        = f.input :password,
+          input_html: { autocomplete: "current-password", class: 'mb-4' }
+        = f.input :remember_me, label: 'ログイン情報を保存する', as: :boolean if devise_mapping.rememberable?
+      .form-actions
+        = f.button :submit, "ログイン", class: 'my-4'
