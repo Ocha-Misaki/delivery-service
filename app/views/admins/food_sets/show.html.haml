@@ -5,21 +5,19 @@
         .card-body
           .fs-3.mb-3
             = @food_set.name
-          .fs-5.mb-4
-            = simple_format(h(@food_set.allergy_info))
           .fs-6.card-text.mx-3.fw-semibold
-            税込価格: #{price_including_tax_text(@food_set)}
+            価格: #{@food_set.price}円
           .fs-6.card-text.mx-3.fw-semibold
-            重量: #{display_weight(@food_set.total_weight)}
+            重量: #{@food_set.total_weight}g
           .fs-6.card-text.mx-3.fw-semibold
-            冷蔵: #{display_refrigerated(@food_set.refrigerated)}
+            冷蔵: #{@food_set.refrigerated ? '要' : '不要'}
           .fs-6.card-text.mx-3.fw-semibold
             .flex.gap-2
               %div
                 食品: #{@food_set.foods.map(&:name).join(", ")}
-              %div
-                = button_to '食品をセットから削除する', admins_food_set_food_set_items_path(@food_set), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm"
+              - if @food_set.food_set_items.any?
+                %div
+                  = button_to '食品をセットから削除する', admins_food_set_food_set_items_path(@food_set), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm"
       .hstack.mt-4
-        .p-2= link_to '編集', edit_admin_food_set_path(@food_set), class: "link-primary link-offset-1 me-1 text-decoration-none"
-        .p-2= link_to '食品をセットに登録する', new_admins_food_set_food_set_item(@food_set), class: "link-primary link-offset-1 me-1 text-decoration-none"
-        .p-2= button_to '削除', admin_food_set_path(@food_set), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger"
+        .p-2= link_to '編集', edit_admins_food_set_path(@food_set), class: "link-primary link-offset-1 me-1 text-decoration-none"
+        .p-2= button_to '削除', admins_food_set_path(@food_set), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger"

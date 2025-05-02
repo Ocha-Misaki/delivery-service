@@ -1,9 +1,9 @@
-.container
-  .row
-    - @foods.each do |food|
-      .col-sm-4.mb-3.mb-sm-0
-        .card.mb-4
-          = link_to admin_food_path(food), class: 'text-decoration-none' do
-            .card-body.ms-2
-              .fs-6.card-text.mx-3.fw-semibold= food.name
-              .fs-6.card-text.mx-3.fw-semibold= simple_format(h(food.allergy_info))
+.row
+  - @foods.each do |food|
+    .col-sm-4.mb-3.mb-sm-0
+      .card.mb-4
+        = link_to admins_food_path(food), class: 'text-decoration-none' do
+          .card-body.ms-2
+            .fs-6.card-text.mx-3.fw-semibold= food.name
+            .fs-6.card-text.mx-3.my-3.fw-semibold
+              アレルギー情報: #{simple_format(h(food.allergy_info))}

@@ -9,13 +9,13 @@
     %meta{ name: "viewport", content: "width=device-width,initial-scale=1.0,maximum-scale=1.0" }
     = csrf_meta_tags
     = csp_meta_tag
-    = favicon_link_tag 'favicon.ico'
     = yield :head
     %link{ rel: "stylesheet", type: "text/css", href: "https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" }
     %script{ type: "text/javascript", src: "https://cdn.jsdelivr.net/npm/toastify-js" }
     = stylesheet_link_tag 'application', "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
   %body
-    = render 'admin/layouts/header'
+    = render 'admins/header'
     = render 'layouts/flash'
-    = yield
+    .container.mt-4
+      = yield

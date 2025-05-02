@@ -1,4 +1,4 @@
-- url = food.new_record? ? admin_foods_path : admin_food_path(food)
+- url = food.new_record? ? admins_foods_path : admins_food_path(food)
 - method = food.new_record? ? :post : :patch
 
 = simple_form_for(food, url: url, method: method) do |f|

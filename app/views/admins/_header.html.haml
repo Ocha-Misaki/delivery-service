@@ -1,14 +1,18 @@
-%nav.navbar.navbar-expand-lg.navbar-light.border-bottom.mb-4.justify-content-md-between
+%nav.navbar.navbar.bg-dark.border-bottom.border-bottom-dark
   .container
-    = link_to '管理画面', admin_root_path
+    = link_to '管理画面', admins_root_path, class: 'navbar-brand text-white'
     %ul.nav.nav-pills
       - if admin_signed_in?
         %li.nav-item
-          = link_to "食品登録", new_admin_food_path, class: "nav-link"
+          = link_to "食品登録", new_admins_food_path, class: "nav-link text-white"
         %li.nav-item
-          = link_to "商品登録", new_admins_food_sets_path, class: "nav-link"
+          = link_to "食品一覧", admins_root_path, class: "nav-link text-white"
         %li.nav-item
-          = button_to '管理者ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link"
+          = link_to "商品登録", new_admins_food_set_path, class: "nav-link text-white"
+        %li.nav-item
+          = link_to "商品一覧", admins_food_sets_path, class: "nav-link text-white"
+        %li.nav-item
+          = button_to '管理者ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link text-white"
       - else
         %li.nav-item
           = link_to 'ログイン', new_admin_session_path

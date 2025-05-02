@@ -12,9 +12,9 @@ class Admins::FoodSetsController < Admins::ApplicationController
   end
 
   def create
-    @food_set = FoodSet.new(grocery_params)
+    @food_set = FoodSet.new(food_set_params)
     if @food_set.save
-      redirect_to admins_food_sets_path, notice: t("controller.created")
+      redirect_to admins_food_sets_path, notice: t("controllers.created")
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,8 +23,8 @@ class Admins::FoodSetsController < Admins::ApplicationController
   def edit; end
 
   def update
-    if @food_set.update(grocery_params)
-      redirect_to admins_food_sets_path, notice: t("controller.updated")
+    if @food_set.update(food_set_params)
+      redirect_to admins_food_sets_path, notice: t("controllers.updated")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class Admins::FoodSetsController < Admins::ApplicationController
 
   def destroy
     @food_set.destroy!
-    redirect_to admins_food_sets_path, notice: t("controller.deleted")
+    redirect_to admins_food_sets_path, notice: t("controllers.deleted")
   end
 
   private
@@ -42,6 +42,6 @@ class Admins::FoodSetsController < Admins::ApplicationController
   end
 
   def food_set_params
-    params.expect(food_set: %i[name price total_weight refrigerated])
+    params.expect(food_set: %i[name price total_weight refrigerated, food_ids: []])
   end
 end
