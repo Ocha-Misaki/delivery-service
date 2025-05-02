@@ -25,6 +25,14 @@ class FoodSet < ApplicationRecord
     foods.map(&:allergy_info).join(", ")
   end
 
+  def refrigerated_fee
+    if refrigerated?
+      REFRIGERATED_FEE
+    else
+      0
+    end
+  end
+
   private
 
   def validate_recipe

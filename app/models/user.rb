@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders, dependent: :restrict_with_exception
+  has_many :order_items, through: :orders
 
   validates :name, presence: true
   validates :plan, presence: true
@@ -27,16 +28,22 @@ class User < ApplicationRecord
   end
 
   def food_set_orderable?(food_set)
-    orders.exists?(food_set: food_set)
+    order_items.exists?(food_set_id: food_set.id)
   end
 
   def create_order_by!(food_set)
-    order = orders.build(
-      food_set: food_set,
-      shipping_fee: self.shipping_fee,
-      refrigerated_fee: food_set.refrigerated? ? FoodSet::REFRIGERATED_FEE : 0,
-    )
-    order.total_price = food_set.price_including_tax + order.shipping_fee + order.refrigerated_fee
-    order.save!
+    transaction do
+      order = orders.build
+      order_item = order.build_order_item(
+        food_set_name: food_set.name,
+        food_set_total_weight: food_set.total_weight,
+        food_set_shipping_fee: shipping_fee,
+        food_set_refrigerated_fee: food_set.refrigerated_fee,
+        food_set_price: food_set.price_including_tax,
+        food_set: food_set
+      )
+      order_item.food_set_total_price = order_item.food_set_price + order_item.food_set_shipping_fee + order_item.food_set_refrigerated_fee
+      order_item.save!
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_02_062841) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_073514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -54,27 +54,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_062841) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "delivery_schedules", force: :cascade do |t|
-    t.string "time_period"
-    t.date "scheduled_on"
-    t.string "status", null: false
-    t.bigint "order_id", null: false
-    t.bigint "delivery_subscription_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["delivery_subscription_id"], name: "index_delivery_schedules_on_delivery_subscription_id"
-    t.index ["order_id"], name: "index_delivery_schedules_on_order_id"
-  end
-
-  create_table "delivery_subscriptions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.date "planned_delivery_on", null: false
-    t.date "next_delivery_on", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_delivery_subscriptions_on_user_id"
-  end
-
   create_table "food_set_items", force: :cascade do |t|
     t.bigint "food_id", null: false
     t.bigint "food_set_id", null: false
@@ -101,16 +80,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_062841) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "order_items", force: :cascade do |t|
     t.bigint "food_set_id", null: false
-    t.integer "total_price", null: false
-    t.integer "shipping_fee", null: false
-    t.integer "refrigerated_fee", default: 0, null: false
+    t.bigint "order_id", null: false
+    t.string "food_set_name", null: false
+    t.integer "food_set_price", null: false
+    t.integer "food_set_total_weight", null: false
+    t.integer "food_set_refrigerated_fee", null: false
+    t.integer "food_set_shipping_fee", null: false
+    t.integer "food_set_total_price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["food_set_id"], name: "index_orders_on_food_set_id"
-    t.index ["user_id", "food_set_id"], name: "index_orders_on_user_id_and_food_set_id", unique: true
+    t.index ["food_set_id", "order_id"], name: "index_order_items_on_food_set_id_and_order_id", unique: true
+    t.index ["food_set_id"], name: "index_order_items_on_food_set_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -135,11 +124,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_062841) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "delivery_schedules", "delivery_subscriptions"
-  add_foreign_key "delivery_schedules", "orders"
-  add_foreign_key "delivery_subscriptions", "users"
   add_foreign_key "food_set_items", "food_sets"
   add_foreign_key "food_set_items", "foods"
-  add_foreign_key "orders", "food_sets"
+  add_foreign_key "order_items", "food_sets"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
 end

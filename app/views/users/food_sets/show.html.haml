@@ -6,7 +6,7 @@
           .fs-3.mb-3
             = @food_set.name
           .fs-6.card-text.mx-3.fw-semibold
-            価格: #{@food_set.price}円
+            価格: #{@food_set.price}円(税込)
           .fs-6.card-text.mx-3.fw-semibold
             重量: #{@food_set.total_weight}g
           .fs-6.card-text.mx-3.fw-semibold
@@ -15,6 +15,6 @@
             食品: #{@food_set.foods.map(&:name).join(", ")}
           .fs-6.card-text.mx-3.fw-semibold
             - if current_user.food_set_orderable?(@food_set)
-              申し込み済み
+              .text-danger 申し込み済み
             - else
               = button_to '配達を申し込む', users_food_set_orders_path(@food_set), method: :post, class: 'btn btn-primary', data: { turbo_confirm: '申し込んでよろしいですか？' }
