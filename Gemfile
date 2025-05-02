@@ -20,6 +20,7 @@ gem "simple_form"
 gem "devise"
 gem "haml-rails"
 gem "dotenv-rails"
+gem "enumerize"
 
 
 group :development, :test do
