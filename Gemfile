@@ -19,6 +19,7 @@ gem "thruster", require: false
 gem "simple_form"
 gem "devise"
 gem "haml-rails"
+gem "dotenv-rails"
 
 
 group :development, :test do
