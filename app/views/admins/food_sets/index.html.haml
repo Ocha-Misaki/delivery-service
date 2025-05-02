@@ -10,3 +10,8 @@
               .fs-6.card-text.mx-3.fw-semibold= "重量: #{food_set.total_weight}g"
               .fs-6.card-text.mx-3.fw-semibold= "冷蔵: #{food_set.refrigerated? ? '要' : '不要'}"
               .fs-6.card-text.mx-3.my-3.fw-semibold= "食品: #{food_set.foods.map(&:name).join(", ")}"
+              .fs-6.card-text.mx-3.my-3.fw-semibold
+                - if food_set.recipe.attached?
+                  レシピ添付
+                - else
+                  レシピ未添付

@@ -7,6 +7,6 @@
   = f.input :price, input_html: { min: 0 }
   = f.input :total_weight, input_html: { min: 0, step: 10 }
   = f.input :refrigerated, as: :boolean
-  = f.input :recipes, input_html: { accept: 'application/pdf'}
+  = f.input :recipe, input_html: { accept: 'application/pdf'}
   = f.association :foods, as: :check_boxes, label_method: :name, wrapper: :vertical_collection_inline
   = f.button :submit, class: "btn btn-outline-success my-4"

@@ -42,6 +42,6 @@ class Admins::FoodSetsController < Admins::ApplicationController
   end
 
   def food_set_params
-  params.require(:food_set).permit(:name, :price, :total_weight, :refrigerated, recipes: [], food_ids: [])
+  params.require(:food_set).permit(:name, :price, :total_weight, :refrigerated, :recipe, food_ids: [])
   end
 end
