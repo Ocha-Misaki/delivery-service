@@ -5,6 +5,7 @@ class FoodSet < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
   validates :total_weight, presence: true
+  validates :refrigerated, inclusion: { in: [true, false] }
 
   scope :default_order, -> { order(created_at: :desc) }
   scope :refrigerated, -> { where(refrigerated: true) }
