@@ -8,7 +8,7 @@ class CreateOrderItems < ActiveRecord::Migration[8.0]
       t.integer :food_set_total_weight, null: false
       t.integer :food_set_refrigerated_fee, null: false
       t.integer :food_set_shipping_fee, null: false
-      t.integer :food_set_total_price, null: false
+      t.integer :total_price, null: false
       t.timestamps
     end
     add_index :order_items, [ :food_set_id, :order_id ], unique: true

@@ -42,7 +42,7 @@ class User < ApplicationRecord
         food_set_price: food_set.price_including_tax,
         food_set: food_set
       )
-      order_item.food_set_total_price = order_item.food_set_price + order_item.food_set_shipping_fee + order_item.food_set_refrigerated_fee
+      order_item.total_price = order_item.food_set_price + order_item.food_set_shipping_fee + order_item.food_set_refrigerated_fee
       order_item.save!
     end
   end
