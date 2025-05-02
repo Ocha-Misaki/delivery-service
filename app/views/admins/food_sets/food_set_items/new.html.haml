@@ -1,0 +1,6 @@
+.container
+  .fs-2.page-title 商品登録
+  = simple_form(:food_set_item, url: food_set_items_path) do |f|
+    = f.input :food_set_id, as: :hidden, input_html: { value: @food_set.id }
+    = f.input :food_id, collection: @foods, label: '商品', include_blank: false
+    = f.button :submit, class: 'btn btn-primary'
